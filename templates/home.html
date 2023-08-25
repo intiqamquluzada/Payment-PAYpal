@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ request.user }}</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    {% if messages %}
+<ul>
+    {% for message in messages %}
+
+<li> {{message}} </li>
+
+    {% endfor %}
+</ul>
+    {% endif %}
+
+    <form method="POST" >
+        {% csrf_token %}
+ 
+        <textarea name="blog" id="" cols="30" rows="10"></textarea>
+     
+        <button type="submit">{% if myvalue %}<a href="https://www.sandbox.paypal.com/cgi-bin/webscr">Send</a>{% endif %}</button>
+
+    </form>
+
+
+
+   
+{{ form.render }}
+
+
+<br><br>
+{% for i in blogs  %}
+{{ i.body }}, {{ i.user }} <br>
+{% endfor %}
+{% else  %}
+<p>Siz daxil olmamisiniz</p>
+
+
+{% for i in all %}
+<p> {{i.body}} </p>
+{{i.user}}
+<hr>
+{% endfor %}
+{% endif %}
+</body>
+</html>
